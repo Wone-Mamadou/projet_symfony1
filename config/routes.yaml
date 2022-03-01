@@ -7,7 +7,7 @@ kernel:
     type: annotation
 
 
-# *********************une manière de faire les routes//////
+# *********************une manière de faire les routes manuellement//////
 # hello:
 #     path: /hello
 #     controller: App\Controller\HelloController::hello
