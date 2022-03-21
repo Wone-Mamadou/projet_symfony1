@@ -11,6 +11,25 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render("home/index.html.twig");
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repo->findAll();
+        return $this->render("home/index.html.twig",[
+            'articles' => $articles,
+            ] );
+    }
+
+    #[Route('/show/{id}', name: 'show')]
+    public function show($id): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+
+        $article = $repo->find($id);
+
+        if (!$article) {
+            return $this->redirectToRoute('home');
+        }
+        
+        return $this->render("show/index.html.twig",[
+            'article' => $article,] );
     }
 }

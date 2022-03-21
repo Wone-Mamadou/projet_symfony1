@@ -30,16 +30,13 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $category;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $relation;
+    
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private $author;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $clear;
-
+   
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -122,17 +119,7 @@ class Article
         return $this;
     }
 
-    public function getRelation(): ?string
-    {
-        return $this->relation;
-    }
-
-    public function setRelation(string $relation): self
-    {
-        $this->relation = $relation;
-
-        return $this;
-    }
+  
 
     public function getAuthor(): ?User
     {
@@ -146,15 +133,5 @@ class Article
         return $this;
     }
 
-    public function getClear(): ?string
-    {
-        return $this->clear;
-    }
-
-    public function setClear(string $clear): self
-    {
-        $this->clear = $clear;
-
-        return $this;
-    }
+    
 }

@@ -5,9 +5,11 @@ namespace App\DataFixtures;
 use App\Entity\Categorie;
 use App\Entity\User;
 use App\Entity\Article;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
@@ -33,7 +35,7 @@ class AppFixtures extends Fixture
 
         $categories = [];
 
-        for ($i=0; $i < 50; $i++) { 
+        for ($i=0; $i < 15; $i++) { 
             $categorie = new Categorie();
             $categorie->setTitle($faker->text(50));
             $categorie->setDescription($faker->text(250));
