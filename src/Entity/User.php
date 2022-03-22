@@ -53,6 +53,11 @@ class User
         return $this->username;
     }
 
+    public function __toString()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
+    
     public function setUsername(string $username): self
     {
         $this->username = $username;

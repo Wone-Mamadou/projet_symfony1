@@ -48,6 +48,11 @@ class Categorie
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->title;
+    }
+
 
     public function getDescription(): ?string
     {
