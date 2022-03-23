@@ -41,6 +41,7 @@ class User
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->createdat = new \Datetime();
     }
 
     public function getId(): ?int

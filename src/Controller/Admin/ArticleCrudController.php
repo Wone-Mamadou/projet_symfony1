@@ -25,7 +25,8 @@ class ArticleCrudController extends AbstractCrudController
             TextField::new('title'),
             TextEditorField::new('content'),
             ImageField::new('image')->setUploadDir("public/assets/blog/images")
-                                        ->setBasePath("assets/blog/images"),
+                                        ->setBasePath("assets/blog/images")
+                                        ->setRequired(false),
             AssociationField::new('author'),
             AssociationField::new('category'),
         ];
