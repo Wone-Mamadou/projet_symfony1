@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
 use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,12 +20,14 @@ class HomeController extends AbstractController
     }
 
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    public function index(CategorieRepository $repoCategorie): Response
     {
+        $categories = $repoCategorie->findAll();
         $articles = $this->repoArticle->findAll();
 
         return $this->render("home/index.html.twig",[
             'articles' => $articles,
+            'categories' => $categories
             ] );
     }
 
@@ -38,5 +42,22 @@ class HomeController extends AbstractController
         
         return $this->render("show/index.html.twig",[
             'article' => $article,] );
+    }
+
+    #[Route('/showArticle/{id}', name: 'show_article')]
+    public function showAricle(?Categorie $categorie): Response
+    { 
+        if ($categorie) {
+            $articles = $categorie->getArticles()->getValues();
+        }else {
+            
+           return $this->redirectToRoute('home');
+        }
+        
+        // dd($articles);
+
+        return $this->render("show/showArticle.html.twig",[
+            'articles' => $articles,
+        ]);
     }
 }
