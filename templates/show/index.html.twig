@@ -3,10 +3,10 @@
 {% block body %}
 
 <div class="container">
-    <div class="img-fluid">
+    <div class="img-fluid pt-5">
         <img width="100%" src="/assets/blog/images/{{ article.image }}" alt="{{ article.title }}">
     </div>
-    <div class="content">
+    <div class="content pt-3">
         <p class="date">Ecrit le {{ article.dateDecreation | date("d/m/Y") }} à {{ article.dateDecreation | date("H:i") }}
             par <span class="author">{{article.author}}</span>
         </p>
