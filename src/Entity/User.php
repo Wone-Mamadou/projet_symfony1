@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -19,25 +20,33 @@ class User
     #[ORM\Column(type: 'string', length: 255)]
     private $username;
 
+    #[Assert\Length(
+        min:2,  
+        max: 50,
+    )]
     #[ORM\Column(type: 'string', length: 255)]
     private $firstname;
 
-
+    #[Assert\Length(min:2,  max : 50)]
     #[ORM\Column(type: 'string', length: 255)]
     private $lastname;
 
+    #[Assert\Email(message : "l'email tapé n'est pas valide!"  )]
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
+    #[Assert\Length(min:4,  max :50)]
     #[ORM\Column(type: 'string', length: 255)]
     private $password;
 
     #[ORM\Column(type: 'datetime')]
     private $createdat;
 
+    
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class)]
     private $articles;
-
+    
+    #[Assert\EqualTo(propertyPath:"password", message:"mot de passe incorrect")]
     private $passwordConfirm;
 
     public function __construct()
