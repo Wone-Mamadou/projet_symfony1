@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Categorie;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,9 +43,17 @@ class HomeController extends AbstractController
         if (!$article) {
             return $this->redirectToRoute('home');
         }
+
+        $commentaire = new Commentaire();
+
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+
         
         return $this->render("show/index.html.twig",[
-            'article' => $article,] );
+            'form' =>$form->createView(),
+            'article' => $article
+            
+            ] );
     }
 
     #[Route('/showArticle/{id}', name: 'show_article')]
