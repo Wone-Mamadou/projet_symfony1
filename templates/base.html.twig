@@ -6,10 +6,8 @@
         <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}{% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
+        
     </head>
     <body>
         <header>
@@ -49,6 +47,9 @@
         <div class="container-fluid">
             {% block body %}{% endblock %}
         </div>
-        
+       
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>

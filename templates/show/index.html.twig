@@ -18,10 +18,18 @@
         </p>
     </div>
 </div>
-
+<hr>
 <div class="container">
-
-        {% block title %}Hello CommentaireController!{% endblock %}
+    {% for commentaire in commentaires %}
+    commenté par {{commentaire.pseudo}} le {{commentaire.dateCreation |  date("d/m/Y") }} à {{ article.dateDecreation | date("H:i") }}
+    <div class="content">
+        {{commentaire.contenus | raw}}
+    </div>
+    {% endfor %}
+   
+</div>
+<hr>
+<div class="container">
 
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -32,8 +40,9 @@
         
 
         {{ form_start(form) }}
-
         {{ form_widget(form) }}
+
+        <input type="hidden" name="article" value="{{article.id}}">
         <button type="submit" class="btn btn-success"> Envoyer</button>
         <button type="reset" class="btn btn-danger"> Annuler</button>
     {{ form_end(form) }}

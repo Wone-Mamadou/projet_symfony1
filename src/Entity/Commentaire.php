@@ -25,6 +25,12 @@ class Commentaire
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'commentaires')]
     private $article;
 
+    public function __construct()
+    {
+        $this->dateCreation = $this->getDateCreation()->format("d/M/Y à H:i:s");
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,12 +60,12 @@ class Commentaire
         return $this;
     }
 
-    public function getDateCreation(): ?string
+    public function getDateCreation(): ?\DateTimeInterface
     {
-        return $this->dateCreation;
+        return $this->dateCreation = new \DateTime();
     }
 
-    public function setDateCreation(string $dateCreation): self
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
 
