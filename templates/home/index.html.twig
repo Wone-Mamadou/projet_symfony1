@@ -18,7 +18,9 @@
             </p>
             <img class="card-img-top" src="/assets/blog/images/{{ article.image }}" alt="{{ article.title }}">
             <div class="card-body">
-              <h5 class="card-title">{{ article.title }}</h5>
+             {% if article.title != 'Tata' %}
+               <h5 class="card-title">{{ article.title }}</h5>
+            {% endif %}
               
               <a href="{{ path('show',{'id':article.id})}}" class="btn btn-primary">En savoir plus</a>
             </div>

@@ -49,10 +49,17 @@ class User
     #[Assert\EqualTo(propertyPath:"password", message:"mot de passe incorrect")]
     private $passwordConfirm;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $role;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commentaire::class)]
+    private $relation;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->createdat = new \Datetime();
+        $this->relation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,6 +179,48 @@ class User
             // set the owning side to null (unless already changed)
             if ($article->getAuthor() === $this) {
                 $article->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(?string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getRelation(): Collection
+    {
+        return $this->relation;
+    }
+
+    public function addRelation(Commentaire $relation): self
+    {
+        if (!$this->relation->contains($relation)) {
+            $this->relation[] = $relation;
+            $relation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelation(Commentaire $relation): self
+    {
+        if ($this->relation->removeElement($relation)) {
+            // set the owning side to null (unless already changed)
+            if ($relation->getUser() === $this) {
+                $relation->setUser(null);
             }
         }
 

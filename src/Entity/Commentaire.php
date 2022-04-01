@@ -25,6 +25,9 @@ class Commentaire
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'commentaires')]
     private $article;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'relation')]
+    private $user;
+
     public function __construct()
     {
         $this->dateCreation = $this->getDateCreation()->format("d/M/Y à H:i:s");
@@ -80,6 +83,18 @@ class Commentaire
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
