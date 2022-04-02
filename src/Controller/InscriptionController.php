@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class InscriptionController extends AbstractController
 {
@@ -21,9 +23,10 @@ class InscriptionController extends AbstractController
     }
 
     #[Route('/inscription', name: 'inscription')]
-    public function inscription(Request $request): Response
+    public function inscription(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
+        // $plaintextPassword;
 
         $form = $this->createForm(InscriptionType::class, $user);
 
@@ -32,9 +35,17 @@ class InscriptionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //traitement des données recues du formulaire
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $user->getPassword()
+                // $plaintextPassword
+            );
+
+            $user->setPassword($hashedPassword);
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('connexion');
             //dd($user);
         }
 
@@ -43,4 +54,28 @@ class InscriptionController extends AbstractController
             'form' =>$form->createView()
         ]);
     }
+
+    // #[Route('/login', name: 'connexion')]
+    // public function login(): Response{
+
+    //     return $this->render('connexion/index.html.twig', [
+    //         'controller_name' => 'InscriptionController',
+    //     ]);
+    // }
+    // #[Route('/login1', name: 'connexion1')]
+    // public function index(AuthenticationUtils $authenticationUtils): Response
+    //   {
+    //         // get the login error if there is one
+    //         // dd(100);
+    //         $error = $authenticationUtils->getLastAuthenticationError();
+
+    //         // last username entered by the user
+    //         $lastUsername = $authenticationUtils->getLastUsername();
+
+    //                 return $this->render('connexion/index.html.twig', [
+    //          'controller_name' => 'InscriptionController',
+    //          'last_username' => $lastUsername,
+    //          'error' => $error,
+    //                 ]);
+    //   }
 }

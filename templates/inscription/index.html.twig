@@ -36,8 +36,11 @@
                 'placeholder':"Confirmer votre mot de passe.."
             }}) }}</div>
         </div>
+        <div>
+            <button type="submit" class="btn btn-lg btn-primary mb-3"> S'inscrire</button>
+            <a href="{{path ('connexion') }}" class="btn btn-lg btn-secondary  mb-3"> Me connecter </a>
+        </div>
         
-        <button type="submit" class="btn btn-success"> S'inscrire</button>
     {{ form_end(form) }}
 </div>
 {% endblock %}
