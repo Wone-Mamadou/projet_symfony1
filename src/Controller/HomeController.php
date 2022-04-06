@@ -32,7 +32,7 @@ class HomeController extends AbstractController
         $this->repoComment = $repoComment;
     }
 
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
         $categories = $this->repoCategorie->findAll();
@@ -44,7 +44,7 @@ class HomeController extends AbstractController
             ] );
     }
 
-    #[Route('/show/{id}', name: 'show')]
+    #[Route('/show/{id}', name: 'app_article_show')]
     public function show(Article  $article, Request $request, $id): Response
     { 
 
@@ -66,7 +66,7 @@ class HomeController extends AbstractController
         //    dd($commentaire);
             $this->entityManager->persist($commentaire);
             $this->entityManager->flush();
-            return $this->redirectToRoute('show',["id" =>$id]);
+            return $this->redirectToRoute('app_article_show',["id" =>$id]);
             
         }
 
@@ -98,4 +98,7 @@ class HomeController extends AbstractController
             'categories' => $categories
             ] );
     }
+
+
+   
 }

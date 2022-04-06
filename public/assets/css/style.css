@@ -1,13 +1,109 @@
 body{
     background-color: whitesmoke;
+    font-family: 'Cairo', sans-serif;
 }
 
-.team-area{
-    padding-top: 5%;
+.bt1{
+    color: aqua;
 }
 
-.single-team{
-    box-shadow:0px 7px 7px 2px rgba(0,0,0,0.1);
-      background-color: black;
-      margin-bottom: 10px;
+/* 
+body{
+  font-family: 'Cairo', sans-serif;
+
+} */
+
+/* .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.articles .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem;
   }
+  
+  .articles .card {
+    position: relative;
+    top: 0;
+    border-radius: 2%;
+    box-shadow: 0px 0px 17px 3px #ddd;
+    transition-duration: 0.5s;
+    overflow: hidden;
+  }
+  
+  .articles .card:hover {
+    top: -1rem;
+  }
+  
+  .cards .card-image img {
+    max-width: 100%;
+  }
+  
+  .cards .card-info {
+    padding: 0 1rem;
+  }
+  
+  .cards .card-info h4 {
+    margin: 0.8rem 0;
+    font-weight: 600;
+  }
+  
+  .cards .card-info p:first-of-type {
+    margin-bottom: 1.3rem;
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  .cards .card-info p:last-of-type {
+    position: relative;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    border-top: 1px solid #ddd;
+    color: blue
+  }
+  
+  .cards p:last-of-type .card-info span {
+    font-weight: 600;
+    letter-spacing: -1px;
+  }
+  
+  .cards .card-info p:last-of-type a {
+    position: absolute;
+    transform: translateY(13%);
+    right: 21px;
+    color: blue;
+  }
+  
+  
+  @media (max-width: 600px) {
+    .articles .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (min-width: 600px) {
+    .articles .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .articles .cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .articles .cards {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  } */
+  
+  /* end article  */

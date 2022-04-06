@@ -51,8 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\EqualTo(propertyPath:"password", message:"mot de passe incorrect")]
     private $passwordConfirm;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $role;
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commentaire::class)]
     private $relation;
@@ -187,14 +187,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?string
+    
+    public function getRoles(): array
     {
-        return $this->role;
+        $roles = $this->roles;
+
+        return array_unique($roles);
     }
 
-    public function setRole(?string $role): self
+    public function setRoles(array $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -227,10 +230,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
-    }
-    public function getRoles(): array
-    {
-        return ['ROLE_USER'];
     }
     
     // public function getSalt(){}

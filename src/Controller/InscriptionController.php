@@ -38,11 +38,12 @@ class InscriptionController extends AbstractController
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
                 $user->getPassword()
+    
                 // $plaintextPassword
             );
 
             $user->setPassword($hashedPassword);
-
+            $user->setRoles(["ROLE_USER"]);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
             return $this->redirectToRoute('connexion');
@@ -55,27 +56,5 @@ class InscriptionController extends AbstractController
         ]);
     }
 
-    // #[Route('/login', name: 'connexion')]
-    // public function login(): Response{
 
-    //     return $this->render('connexion/index.html.twig', [
-    //         'controller_name' => 'InscriptionController',
-    //     ]);
-    // }
-    // #[Route('/login1', name: 'connexion1')]
-    // public function index(AuthenticationUtils $authenticationUtils): Response
-    //   {
-    //         // get the login error if there is one
-    //         // dd(100);
-    //         $error = $authenticationUtils->getLastAuthenticationError();
-
-    //         // last username entered by the user
-    //         $lastUsername = $authenticationUtils->getLastUsername();
-
-    //                 return $this->render('connexion/index.html.twig', [
-    //          'controller_name' => 'InscriptionController',
-    //          'last_username' => $lastUsername,
-    //          'error' => $error,
-    //                 ]);
-    //   }
 }
