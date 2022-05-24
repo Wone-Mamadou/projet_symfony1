@@ -22,10 +22,12 @@ class HomeController extends AbstractController
     private $entityManager;
     private $repoComment;
 
-    public function __construct(ArticleRepository $repoArticle,CategorieRepository $repoCategorie, 
-                                EntityManagerInterface $entityManager, CommentaireRepository $repoComment                   
-                               )
-    {
+    public function __construct(
+        ArticleRepository $repoArticle,
+        CategorieRepository $repoCategorie,
+        EntityManagerInterface $entityManager,
+        CommentaireRepository $repoComment
+    ) {
         $this->repoArticle = $repoArticle;
         $this->repoCategorie = $repoCategorie;
         $this->entityManager = $entityManager ;
@@ -38,15 +40,15 @@ class HomeController extends AbstractController
         $categories = $this->repoCategorie->findAll();
         $articles = $this->repoArticle->findAll();
 
-        return $this->render("home/index.html.twig",[
+        return $this->render("home/index.html.twig", [
             'articles' => $articles,
             'categories' => $categories
-            ] );
+            ]);
     }
 
     #[Route('/show/{id}', name: 'app_article_show')]
     public function show(Article  $article, Request $request, $id): Response
-    { 
+    {
 
         //$article = $this->repoArticle->find($id);
         if (!$article) {
@@ -63,42 +65,36 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //traitement des données recues du formulaire
             $commentaire->setArticle($article);
-        //    dd($commentaire);
+            //    dd($commentaire);
             $this->entityManager->persist($commentaire);
             $this->entityManager->flush();
-            return $this->redirectToRoute('app_article_show',["id" =>$id]);
-            
+            return $this->redirectToRoute('app_article_show', ["id" =>$id]);
         }
 
-       // dd($this->repoComment->findByArticle($article));
+        // dd($this->repoComment->findByArticle($article));
         
-        return $this->render("show/index.html.twig",[
+        return $this->render("show/index.html.twig", [
             'form' =>$form->createView(),
             'article' => $article,
             'commentaires' => $this->repoComment->findByArticle($article)
             
-            ] );
-            
+            ]);
     }
 
     #[Route('/showArticle/{id}', name: 'show_article')]
     public function showArticle(?Categorie $categorie): Response
-    { 
+    {
         if ($categorie) {
             $articles = $categorie->getArticles()->getValues();
-        }else {
-            
-           return $this->redirectToRoute('app_home');
+        } else {
+            return $this->redirectToRoute('app_home');
         }
         $categories = $this->repoCategorie->findAll();
-         //dd($articles);
+        //dd($articles);
 
-         return $this->render("home/index.html.twig",[
+        return $this->render("show/showArticle.html.twig", [
             'articles' => $articles,
             'categories' => $categories
-            ] );
+            ]);
     }
-
-
-   
 }

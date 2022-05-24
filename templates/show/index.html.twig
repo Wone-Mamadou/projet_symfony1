@@ -25,13 +25,13 @@
             {% for commentaire in commentaires %}
             commenté par {{commentaire.pseudo}} le {{commentaire.dateCreation |  date("d/m/Y") }} à {{ article.dateDecreation | date("H:i") }}
             <div class="content">
-                {% if app.user and app.user.id == commentaires.id %}
+                {# {% if app.user and app.user.id == commentaires.id %} #}
                     {{commentaire.contenus | raw}}  {{ include('commentaire/_delete_form.html.twig') }}
                   &nbsp; - &nbsp;
-                <a href="#">
+                {# <a href="#">
                     <i class="fas fa-trash"> Modifier</i>
-                </a> 
-                {% endif %}
+                </a>  #}
+                {# {% endif %} #}
                 
               
             </div>
